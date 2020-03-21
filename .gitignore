@@ -1,0 +1,14 @@
+# ignore all LaTeX auxiliary files
+*.aux
+*.log
+*.out
+*.synctex.gz
+
+# ignore email messages
+*.eml
+
+# ignore Mathematica notebooks
+*.nb
+
+# ignore Mac .DS_Store hidden files
+.DS_Store
