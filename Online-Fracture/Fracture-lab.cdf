@@ -23,10 +23,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[      1088,         20]
-NotebookDataLength[     27249,        559]
-NotebookOptionsPosition[     27725,        555]
-NotebookOutlinePosition[     28074,        570]
-CellTagsIndexPosition[     28031,        567]
+NotebookDataLength[     29644,        609]
+NotebookOptionsPosition[     29932,        603]
+NotebookOutlinePosition[     30281,        618]
+CellTagsIndexPosition[     30238,        615]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -53,7 +53,7 @@ Cell[BoxData[
         "\[IndentingNewLine]", 
         RowBox[{
          RowBox[{
-          RowBox[{"Kc", "=", "4"}], ";", 
+          RowBox[{"Kc", "=", "2.2"}], ";", 
           RowBox[{"(*", 
            RowBox[{"MPa", ".", 
             SuperscriptBox["m", 
@@ -68,35 +68,52 @@ Cell[BoxData[
              RowBox[{"\[Sqrt]", 
               RowBox[{"(", 
                RowBox[{"\[Pi]", " ", "amax"}], ")"}]}]}]]}], ";", 
+          "\[IndentingNewLine]", "\[IndentingNewLine]", 
+          RowBox[{"l", "=", "20"}], ";", 
+          RowBox[{"(*", 
+           RowBox[{
+           "number", " ", "of", " ", "data", " ", "points", " ", "to", " ", 
+            RowBox[{"generate", "/", "plot"}]}], "*)"}], 
+          "\[IndentingNewLine]", "\[IndentingNewLine]", 
+          RowBox[{"(*", 
+           RowBox[{
+           "add", " ", "some", " ", "randomness", " ", "to", " ", "the", " ", 
+            "stresses"}], "*)"}], "\[IndentingNewLine]", 
+          RowBox[{"randomoffset", "=", 
+           RowBox[{"RandomReal", "[", 
+            RowBox[{"{", 
+             RowBox[{
+              RowBox[{"-", ".05"}], ",", ".05"}], "}"}], "]"}]}], ";", 
           "\[IndentingNewLine]", 
-          RowBox[{"\[Sigma]data", "=", 
+          RowBox[{"random\[Sigma]fail", "=", 
+           RowBox[{"\[Sigma]fail", " ", 
+            RowBox[{"(", 
+             RowBox[{"1", "+", "randomoffset"}], ")"}]}]}], ";", 
+          "\[IndentingNewLine]", "\[IndentingNewLine]", 
+          RowBox[{"(*", 
+           RowBox[{
+            RowBox[{"generate", " ", "stress", " ", "data"}], ",", " ", 
+            RowBox[{
+            "adding", " ", "one", " ", "data", " ", "point", " ", "each", " ",
+              "time", " ", "the", " ", "button", " ", "is", " ", 
+             "pressed"}]}], "*)"}], "\[IndentingNewLine]", 
+          RowBox[{"\[Sigma]", "=", 
            RowBox[{"Append", "[", 
-            RowBox[{
-             RowBox[{"Table", "[", 
-              RowBox[{
-               RowBox[{"i", "+", 
-                RowBox[{
-                 RowBox[{"RandomReal", "[", 
-                  RowBox[{"{", 
-                   RowBox[{"0", ",", ".05"}], "}"}], "]"}], "*", "i"}]}], ",", 
-               RowBox[{"{", 
-                RowBox[{"i", ",", "0", ",", "\[Sigma]fail", ",", 
-                 RowBox[{"\[Sigma]fail", "/", "20"}]}], "}"}]}], "]"}], ",", 
-             "0"}], "]"}]}], ";", "\[IndentingNewLine]", 
-          RowBox[{"\[Sigma]plotdata", "=", 
-           RowBox[{"Table", "[", 
-            RowBox[{
-             RowBox[{"\[Sigma]data", "[", 
-              RowBox[{"[", "j", "]"}], "]"}], ",", 
-             RowBox[{"{", 
-              RowBox[{"j", ",", "1", ",", "x"}], "}"}]}], "]"}]}], ";", 
-          "\[IndentingNewLine]", 
-          RowBox[{"l", "=", 
-           RowBox[{"Length", "[", "\[Sigma]data", "]"}]}], ";", 
+            RowBox[{"\[Sigma]", ",", 
+             RowBox[{"random\[Sigma]fail", " ", 
+              FractionBox["x", "l"]}]}], "]"}]}], ";", "\[IndentingNewLine]", 
+          RowBox[{"\[Sigma]data", "=", 
+           RowBox[{"Drop", "[", 
+            RowBox[{"\[Sigma]", ",", "1"}], "]"}]}], ";", 
+          RowBox[{"(*", 
+           RowBox[{"delete", " ", "a", " ", "leading", " ", "zero"}], "*)"}], 
+          "\[IndentingNewLine]", "\[IndentingNewLine]", 
+          RowBox[{"(*", 
+           RowBox[{"Plot", " ", "the", " ", "data"}], "*)"}], 
           "\[IndentingNewLine]", 
           RowBox[{"p", "=", 
            RowBox[{"ListPlot", "[", 
-            RowBox[{"\[Sigma]plotdata", ",", 
+            RowBox[{"\[Sigma]data", ",", 
              RowBox[{"Frame", "\[Rule]", "True"}], ",", 
              RowBox[{"FrameLabel", "\[Rule]", 
               RowBox[{"{", 
@@ -118,10 +135,8 @@ Cell[BoxData[
             "dogbone", " ", "image"}], "*)"}], "\[IndentingNewLine]", 
           RowBox[{"\[Delta]", "=", 
            RowBox[{
-            RowBox[{"(", 
-             RowBox[{
-              RowBox[{"Length", "[", "\[Sigma]plotdata", "]"}], "-", "2"}], 
-             ")"}], "/", "10"}]}], ";", "\[IndentingNewLine]", 
+            RowBox[{"Length", "[", "\[Sigma]data", "]"}], "/", "10"}]}], ";", 
+          "\[IndentingNewLine]", 
           RowBox[{"l0", "=", "10"}], ";", "\n", "\t", 
           RowBox[{"\[Epsilon]", "=", 
            RowBox[{"\[Delta]", "/", "l0"}]}], ";", 
@@ -137,9 +152,9 @@ Cell[BoxData[
           RowBox[{"\[Beta]", "=", 
            RowBox[{"If", "[", 
             RowBox[{
-             RowBox[{"\[Delta]", "\[GreaterEqual]", "2"}], ",", "1", ",", 
-             "0"}], "]"}]}], ";", "\[IndentingNewLine]", 
-          "\[IndentingNewLine]", 
+             RowBox[{"x", "\[LessEqual]", 
+              RowBox[{"20", "-", "1"}]}], ",", "0", ",", "1"}], "]"}]}], ";", 
+          "\[IndentingNewLine]", "\[IndentingNewLine]", 
           RowBox[{"(*", "Display", "*)"}], "\[IndentingNewLine]", 
           RowBox[{"Grid", "[", 
            RowBox[{
@@ -163,7 +178,7 @@ Cell[BoxData[
                   RowBox[{"ImageSize", "\[Rule]", 
                    RowBox[{"{", 
                     RowBox[{"450", ",", "450"}], "}"}]}]}], "]"}], ",", 
-                RowBox[{"Column", "[", "\[Sigma]plotdata", "]"}], ",", 
+                RowBox[{"Column", "[", "\[Sigma]data", "]"}], ",", 
                 RowBox[{"Graphics", "[", 
                  RowBox[{
                   RowBox[{"{", 
@@ -250,7 +265,7 @@ Cell[BoxData[
          "\[IndentingNewLine]", "\[IndentingNewLine]", 
          RowBox[{"(*", 
           RowBox[{"Dynamic", " ", "Variables"}], "*)"}], 
-         "\[IndentingNewLine]", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+         "\[IndentingNewLine]", 
          RowBox[{"{", 
           RowBox[{
            RowBox[{"{", 
@@ -265,22 +280,22 @@ Cell[BoxData[
          RowBox[{"{", 
           RowBox[{
            RowBox[{"{", 
-            RowBox[{"a", ",", ".1", ",", "\"\<Crack length (mm)\>\""}], "}"}],
-            ",", "0.1", ",", "2", ",", 
+            RowBox[{"a", ",", ".1", ",", "\"\<Crack length, a (mm)\>\""}], 
+            "}"}], ",", "0.1", ",", "2", ",", 
            RowBox[{"Appearance", "\[Rule]", "\"\<Open\>\""}]}], "}"}], ",", 
          "\[IndentingNewLine]", 
          RowBox[{"{", 
           RowBox[{
            RowBox[{"{", 
             RowBox[{"x", ",", "0"}], "}"}], ",", "None"}], "}"}], 
-         "\[IndentingNewLine]", "\[IndentingNewLine]", "\[IndentingNewLine]", 
-         ",", "\[IndentingNewLine]", 
+         "\[IndentingNewLine]", ",", "\[IndentingNewLine]", 
+         "\[IndentingNewLine]", "\[IndentingNewLine]", 
          RowBox[{
          "Text", "[", 
           "\"\<Please note that changing the crack location or the crack \
 length will NOT change the data or the graph. Please press the Reset button \
 before changing the crack location and length.\>\"", "]"}], ",", 
-         "\[IndentingNewLine]", 
+         "\[IndentingNewLine]", "\[IndentingNewLine]", 
          RowBox[{"(*", "Buttons", "*)"}], "\[IndentingNewLine]", 
          RowBox[{"Button", "[", 
           RowBox[{"\"\<Step the applied force\>\"", ",", 
@@ -296,9 +311,21 @@ before changing the crack location and length.\>\"", "]"}], ",",
            RowBox[{"{", 
             RowBox[{
              RowBox[{"x", "=", "0"}], ",", 
-             RowBox[{"Clear", "[", "p", "]"}]}], "}"}]}], "]"}], 
-         "\[IndentingNewLine]", ",", "\[IndentingNewLine]", 
-         "\[IndentingNewLine]", 
+             RowBox[{"Clear", "[", "p", "]"}], ",", 
+             RowBox[{"\[Sigma]", "=", 
+              RowBox[{"{", "0", "}"}]}], ",", 
+             RowBox[{"\[Sigma]data", "=", 
+              RowBox[{"{", "0", "}"}]}]}], "}"}]}], "]"}], 
+         "\[IndentingNewLine]", ",", 
+         RowBox[{"Initialization", "\[RuleDelayed]", 
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{"x", "=", "0"}], ",", 
+            RowBox[{"\[Sigma]", "=", 
+             RowBox[{"{", "}"}]}], ",", 
+            RowBox[{"\[Sigma]data", "=", 
+             RowBox[{"{", "0", "}"}]}]}], "}"}]}], ",", "\[IndentingNewLine]",
+          "\[IndentingNewLine]", 
          RowBox[{"TrackedSymbols", "\[RuleDelayed]", 
           RowBox[{"{", "x", "}"}]}]}], 
         RowBox[{"(*", 
@@ -379,8 +406,28 @@ before changing the crack location and length.\>\"", "]"}], ",",
    3.7934406563123837`*^9, 3.7934407691233006`*^9}, {3.793440836380762*^9, 
    3.7934409768983817`*^9}, {3.793441007911244*^9, 3.7934410397106085`*^9}, {
    3.7934411013617983`*^9, 3.7934411689893765`*^9}, {3.793441322845349*^9, 
-   3.793441323876562*^9}},
- CellLabel->"In[16]:=",ExpressionUUID->"17f3a6e3-12ac-4b0e-a934-38d69eb399eb"],
+   3.793441323876562*^9}, {3.7934621382682824`*^9, 3.793462138482932*^9}, {
+   3.793462236010619*^9, 3.7934622363910723`*^9}, {3.7936142312079124`*^9, 
+   3.7936142526068573`*^9}, {3.7936142859224205`*^9, 3.793614308577193*^9}, {
+   3.793614349827135*^9, 3.7936145113930707`*^9}, 3.793614556771008*^9, {
+   3.793614669919323*^9, 3.7936146826126103`*^9}, {3.793614714562434*^9, 
+   3.7936147373216047`*^9}, {3.793614772807001*^9, 3.7936147808439627`*^9}, {
+   3.793614866809064*^9, 3.793614872037834*^9}, {3.793614927274658*^9, 
+   3.7936149806265574`*^9}, {3.7936150185180187`*^9, 
+   3.7936150435876875`*^9}, {3.793617321663933*^9, 3.793617413341357*^9}, {
+   3.793617523211671*^9, 3.7936175448904114`*^9}, {3.793617631976699*^9, 
+   3.7936176641214695`*^9}, {3.7936177096030235`*^9, 
+   3.7936177633231077`*^9}, {3.7936178309498763`*^9, 3.793617929000085*^9}, {
+   3.7936179606352844`*^9, 3.793618061572279*^9}, {3.7936181306573305`*^9, 
+   3.7936181911730824`*^9}, {3.7936183081107287`*^9, 
+   3.7936183099183865`*^9}, {3.793618342147216*^9, 3.7936184621720257`*^9}, {
+   3.7936185972432117`*^9, 3.793618607793501*^9}, {3.7936186545252*^9, 
+   3.7936187213034678`*^9}, {3.7936187556088743`*^9, 
+   3.7936187599035287`*^9}, {3.793618793546768*^9, 3.793618823591917*^9}, 
+   3.7936188546927023`*^9, {3.79361922058261*^9, 3.7936192351926737`*^9}, {
+   3.793620235228139*^9, 3.7936203380884495`*^9}, 3.793620440350109*^9, {
+   3.7936206060365252`*^9, 3.793620611038272*^9}},
+ CellLabel->"In[21]:=",ExpressionUUID->"17f3a6e3-12ac-4b0e-a934-38d69eb399eb"],
 
 Cell[BoxData[
  FrameBox[
@@ -401,7 +448,7 @@ Cell[BoxData[
          "\"untitled\"", Typeset`specs$$ = {{{
             Hold[$CellContext`Y$$], 1, "Crack Location"}, {
            1 -> "Center", 1.1 -> "Edge"}}, {{
-            Hold[$CellContext`a$$], 0.1, "Crack length (mm)"}, 0.1, 2}, {{
+            Hold[$CellContext`a$$], 0.1, "Crack length, a (mm)"}, 0.1, 2}, {{
             Hold[$CellContext`x$$], 0}, 0}, {
            Hold[
             Text[
@@ -416,56 +463,57 @@ changing the crack location and length."]],
            Manipulate`Dump`ThisIsNotAControl}, {
            Hold[
             Button["Reset", {$CellContext`x$$ = 0, 
-              Clear[$CellContext`p]}]], Manipulate`Dump`ThisIsNotAControl}}, 
-         Typeset`size$$ = {885., {237.5, 244.5}}, Typeset`update$$ = 0, 
-         Typeset`initDone$$, Typeset`skipInitDone$$ = 
-         True, $CellContext`Y$51630$$ = False, $CellContext`a$51631$$ = 0}, 
+              
+              Clear[$CellContext`p], $CellContext`\[Sigma] = {
+               0}, $CellContext`\[Sigma]data = {0}}]], 
+           Manipulate`Dump`ThisIsNotAControl}}, Typeset`size$$ = {
+         869., {237.5, 244.5}}, Typeset`update$$ = 0, Typeset`initDone$$, 
+         Typeset`skipInitDone$$ = False, $CellContext`Y$39220$$ = 
+         False, $CellContext`a$39221$$ = 0}, 
          DynamicBox[Manipulate`ManipulateBoxes[
           1, StandardForm, 
            "Variables" :> {$CellContext`a$$ = 0.1, $CellContext`x$$ = 
              0, $CellContext`Y$$ = 1}, "ControllerVariables" :> {
-             Hold[$CellContext`Y$$, $CellContext`Y$51630$$, False], 
-             Hold[$CellContext`a$$, $CellContext`a$51631$$, 0]}, 
+             Hold[$CellContext`Y$$, $CellContext`Y$39220$$, False], 
+             Hold[$CellContext`a$$, $CellContext`a$39221$$, 0]}, 
            "OtherVariables" :> {
             Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
              Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
              Typeset`specs$$, Typeset`size$$, Typeset`update$$, 
              Typeset`initDone$$, Typeset`skipInitDone$$}, 
            "Body" :> ($CellContext`Kc = 
-             4; $CellContext`amax = $CellContext`a$$/
+             2.2; $CellContext`amax = $CellContext`a$$/
               1000; $CellContext`\[Sigma]fail = \
-$CellContext`Kc/($CellContext`Y$$ 
-              Sqrt[Pi $CellContext`amax]); $CellContext`\[Sigma]data = Append[
-               
-               Table[$CellContext`i + 
-                RandomReal[{0, 0.05}] $CellContext`i, {$CellContext`i, 
-                 0, $CellContext`\[Sigma]fail, $CellContext`\[Sigma]fail/20}],
-                0]; $CellContext`\[Sigma]plotdata = Table[
-               
-               Part[$CellContext`\[Sigma]data, $CellContext`j], \
-{$CellContext`j, 1, $CellContext`x$$}]; $CellContext`l = 
-             Length[$CellContext`\[Sigma]data]; $CellContext`p = 
-             ListPlot[$CellContext`\[Sigma]plotdata, Frame -> True, 
+$CellContext`Kc/($CellContext`Y$$ Sqrt[Pi $CellContext`amax]); $CellContext`l = 
+             20; $CellContext`randomoffset = 
+             RandomReal[{-0.05, 
+               0.05}]; $CellContext`random\[Sigma]fail = \
+$CellContext`\[Sigma]fail (
+               1 + $CellContext`randomoffset); $CellContext`\[Sigma] = 
+             Append[$CellContext`\[Sigma], $CellContext`random\[Sigma]fail \
+($CellContext`x$$/$CellContext`l)]; $CellContext`\[Sigma]data = 
+             Drop[$CellContext`\[Sigma], 1]; $CellContext`p = 
+             ListPlot[$CellContext`\[Sigma]data, Frame -> True, 
                FrameLabel -> {
                 "Load step", 
                  "\!\(\*SubscriptBox[\(\[Sigma]\), \(zz\)]\) (MPa)"}, 
                PlotMarkers -> "OpenMarkers", 
                PlotRange -> {-1, $CellContext`\[Sigma]fail 1.1}, LabelStyle -> 
-               Large]; $CellContext`\[Delta] = (
-               Length[$CellContext`\[Sigma]plotdata] - 2)/10; $CellContext`l0 = 
+               Large]; $CellContext`\[Delta] = 
+             Length[$CellContext`\[Sigma]data]/10; $CellContext`l0 = 
              10; $CellContext`\[Epsilon] = \
 $CellContext`\[Delta]/$CellContext`l0; $CellContext`\[Epsilon]r = \
 (-$CellContext`\[Nu]) $CellContext`\[Epsilon]; $CellContext`length = \
 $CellContext`l0 + $CellContext`\[Delta]; $CellContext`\[Nu] = 
              0.4; $CellContext`R0 = 1; $CellContext`k = 
              RandomReal[]; $CellContext`\[Beta] = 
-             If[$CellContext`\[Delta] >= 2, 1, 0]; Grid[{{"", 
+             If[$CellContext`x$$ <= 20 - 1, 0, 1]; Grid[{{"", 
                 Text[
                  Style[
                  "\!\(\*SubscriptBox[\(\[Sigma]\), \(zz\)]\) (MPa)", FontSize -> 
                   Large]], ""}, {
                 GraphicsGrid[{{$CellContext`p}}, ImageSize -> {450, 450}], 
-                Column[$CellContext`\[Sigma]plotdata], 
+                Column[$CellContext`\[Sigma]data], 
                 Graphics[{Gray, 
                   
                   Rectangle[{(-$CellContext`R0)/
@@ -494,8 +542,8 @@ $CellContext`length}],
                  Scaled[0.3]}}, Alignment -> Top]), 
            "Specifications" :> {{{$CellContext`Y$$, 1, "Crack Location"}, {
               1 -> "Center", 1.1 -> "Edge"}, ControlType -> 
-              SetterBar}, {{$CellContext`a$$, 0.1, "Crack length (mm)"}, 0.1, 
-              2, Appearance -> "Open"}, {{$CellContext`x$$, 0}, 0, 
+              SetterBar}, {{$CellContext`a$$, 0.1, "Crack length, a (mm)"}, 
+              0.1, 2, Appearance -> "Open"}, {{$CellContext`x$$, 0}, 0, 
               ControlType -> None}, 
              Text[
              "Please note that changing the crack location or the crack \
@@ -505,13 +553,18 @@ before changing the crack location and length."],
              "Step the applied force", {$CellContext`x$$ = $CellContext`x$$ + 
                 1}, Enabled -> Dynamic[$CellContext`x$$ < $CellContext`l]], 
              Button["Reset", {$CellContext`x$$ = 0, 
-               Clear[$CellContext`p]}]}, 
+               
+               Clear[$CellContext`p], $CellContext`\[Sigma] = {
+                0}, $CellContext`\[Sigma]data = {0}}]}, 
            "Options" :> {TrackedSymbols :> {$CellContext`x$$}}, 
            "DefaultOptions" :> {}],
-          ImageSizeCache->{936., {347., 354.}},
+          ImageSizeCache->{920., {347., 354.}},
           SingleEvaluation->True],
          Deinitialization:>None,
          DynamicModuleValues:>{},
+         Initialization:>({$CellContext`x$$ = 
+            0, $CellContext`\[Sigma] = {}, $CellContext`\[Sigma]data = {0}}; 
+          Typeset`initDone$$ = True),
          SynchronousInitialization->True,
          UndoTrackedVariables:>{Typeset`show$$, Typeset`bookmarkMode$$},
          UnsavedVariables:>{Typeset`initDone$$},
@@ -526,35 +579,30 @@ before changing the crack location and length."],
    "Column"],
   FrameMargins->Large,
   StripOnInput->False]], "Output",
- CellChangeTimes->{{3.7933942751744194`*^9, 3.7933943310405893`*^9}, 
-   3.793394372403922*^9, 3.793394406251664*^9, {3.7933944477388086`*^9, 
-   3.793394488893849*^9}, {3.793395747477559*^9, 3.793395770730296*^9}, {
-   3.7933958098375063`*^9, 3.7933959098559546`*^9}, 3.793396042255155*^9, 
-   3.7933960923578377`*^9, 3.7933961327787514`*^9, 3.7933962155085044`*^9, {
-   3.7933962756451907`*^9, 3.7933962843067355`*^9}, 3.7933963566600294`*^9, 
-   3.793396576591235*^9, {3.7933967033284683`*^9, 3.79339672055404*^9}, 
-   3.7933968211189694`*^9, {3.793396918595815*^9, 3.7933969239117804`*^9}, {
-   3.7933969643454514`*^9, 3.793396973574628*^9}, 3.7933971456709194`*^9, 
-   3.7933972255275507`*^9, {3.7934002093105717`*^9, 3.793400216912114*^9}, 
-   3.793400285138365*^9, {3.793400453719185*^9, 3.7934004693162966`*^9}, {
-   3.7934005719345384`*^9, 3.7934005763437405`*^9}, {3.7934006211244764`*^9, 
-   3.793400626689107*^9}, {3.7934007698524933`*^9, 3.7934008325432143`*^9}, 
-   3.793400913052663*^9, 3.793401859014689*^9, 3.793401932687857*^9, 
-   3.793402039899872*^9, 3.793402083299739*^9, {3.7934021463606777`*^9, 
-   3.7934021547166543`*^9}, 3.7934021865183*^9, 3.79340223276363*^9, 
-   3.7934024099464054`*^9, 3.793402483797433*^9, 3.7934025732551794`*^9, {
-   3.793402613199046*^9, 3.7934026306882887`*^9}, 3.7934026956957054`*^9, 
-   3.7934027712887096`*^9, 3.793402810351776*^9, 3.7934028470254865`*^9, {
-   3.7934031090345902`*^9, 3.7934031223169575`*^9}, 3.793403220100297*^9, {
-   3.7934391822757483`*^9, 3.793439231293028*^9}, 3.7934400923571777`*^9, 
-   3.793440675374242*^9, {3.793440721275281*^9, 3.7934407490754566`*^9}, 
-   3.793440912619132*^9, {3.793440947449169*^9, 3.793440977681209*^9}, 
-   3.7934410337772684`*^9, 3.7934411559296627`*^9, 3.7934413259205284`*^9},
- CellLabel->"Out[16]=",ExpressionUUID->"1b8c48c6-f955-4709-a119-3210f59688df"]
-}, Open  ]]
+ CellChangeTimes->{{3.793617847970982*^9, 3.7936179302724147`*^9}, {
+   3.7936179794763727`*^9, 3.793618062698389*^9}, 3.793618131931673*^9, 
+   3.7936181723877077`*^9, {3.7936183011634216`*^9, 3.7936183105459037`*^9}, {
+   3.793618364776458*^9, 3.793618430476329*^9}, 3.7936184631481524`*^9, {
+   3.7936185816743326`*^9, 3.793618608386469*^9}, {3.7936187238866386`*^9, 
+   3.793618770536832*^9}, {3.7936188573778095`*^9, 3.793618872612791*^9}, {
+   3.7936192247520046`*^9, 3.793619235835638*^9}, 3.793620343258439*^9, {
+   3.7936206076112905`*^9, 3.7936206337249527`*^9}, {3.7936206811215525`*^9, 
+   3.7936206858493166`*^9}},
+ CellLabel->"Out[21]=",ExpressionUUID->"9135e537-7ca5-4a41-9405-5c57fb9c9ba8"]
+}, Open  ]],
+
+Cell[BoxData[""], "Input",
+ CellChangeTimes->{{3.793617681169265*^9, 
+  3.793617684263536*^9}},ExpressionUUID->"89c1888c-57f6-47c5-bcdd-\
+99c7c0144945"],
+
+Cell[BoxData[""], "Input",
+ CellChangeTimes->{{3.793617562212951*^9, 3.793617562555519*^9}, 
+   3.79361768510312*^9},ExpressionUUID->"ff15dc07-ce8f-4940-a374-\
+43cc9c07af4f"]
 },
-WindowSize->{1080, 1837},
-WindowMargins->{{-1088, Automatic}, {Automatic, -399}},
+WindowSize->{1064, 1837},
+WindowMargins->{{-1088, Automatic}, {Automatic, -391}},
 FrontEndVersion->"12.0 for Microsoft Windows (64-bit) (April 8, 2019)",
 StyleDefinitions->"Default.nb"
 ]
@@ -570,14 +618,14 @@ CellTagsIndex->{}
 (*NotebookFileOutline
 Notebook[{
 Cell[CellGroupData[{
-Cell[1510, 35, 17281, 347, 19, "Input",ExpressionUUID->"17f3a6e3-12ac-4b0e-a934-38d69eb399eb",
+Cell[1510, 35, 20025, 394, 19, "Input",ExpressionUUID->"17f3a6e3-12ac-4b0e-a934-38d69eb399eb",
  CellOpen->False],
-Cell[18794, 384, 8915, 168, 778, "Output",ExpressionUUID->"1b8c48c6-f955-4709-a119-3210f59688df"]
-}, Open  ]]
+Cell[21538, 431, 8046, 159, 811, "Output",ExpressionUUID->"9135e537-7ca5-4a41-9405-5c57fb9c9ba8"]
+}, Open  ]],
+Cell[29599, 593, 152, 3, 28, "Input",ExpressionUUID->"89c1888c-57f6-47c5-bcdd-99c7c0144945"],
+Cell[29754, 598, 174, 3, 28, "Input",ExpressionUUID->"ff15dc07-ce8f-4940-a374-43cc9c07af4f"]
 }
 ]
 *)
 
-(* End of internal cache information *)
-
-(* NotebookSignature fvTqeICS27JSIBwxUkCssKhC *)
+(* NotebookSignature hxTI0DTWTJwV8B1is8IPpLSI *)
