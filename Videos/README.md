@@ -11,5 +11,6 @@ and concrete.  Instructors may find them useful as a component of classroom inst
 
 ## NOTES
 
-The document links to a shared Google Drive folder.  No warranty is made
-that the links will be accessible or active.
+The document links to YouTube videos that were originally produced as
+educational materials by the Advanced Cement Based Materials (ACBM) center
+headquartered at Northwestern University. 
