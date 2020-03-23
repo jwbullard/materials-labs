@@ -7,6 +7,7 @@ from time to time for quality.
 
 ## CONTRIBUTING
 
-Please email the administrator Jeff Bullard <mailto:jwbullard@tamu.edu> if you wish to be added
+Please email the repository [administrator](mailto:jwbullard@tamu.edu) if you wish to be added
 to the list of contributors to this repository.  
+
 Anyone can clone or download this respository or the files in it.
