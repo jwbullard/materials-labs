@@ -14,4 +14,4 @@ in uniaxial tension.
 
 The fracture simulator is Mathematica Computable Document Format file that must be run
 using the Wolfram Player for Notebooks.  This is a free player that can be downloaded
-at <https://www.wolfram.com.player/>.
+at <https://www.wolfram.com/player/>.
