@@ -221,8 +221,8 @@ practice, so it is extremely useful to have a way to solve them.
 
 \textbf{Example}: Suppose you work in a factory that makes two
 particular gadgets, a Fuzzy and a Buzzy.  Each Fuzzy sells for \$5, and it is made by
-connecting three Gizmos to twelve Fizmos.  Each Buzzy sells for \$7, and it is made by
-connecting two Gizmos to two Fizmos.  The factory has 240 Gizmos and 100 Fizmos. 
+connecting three Gizmos to two Fizmos.  Each Buzzy sells for \$7, and it is made by
+connecting twelve Gizmos to two Fizmos.  The factory has 240 Gizmos and 100 Fizmos. 
 Assuming that the factory sells every gadget they produce, how many Fuzzys and Buzzys
 should the factory produce to maximize their revenue?
 
@@ -257,12 +257,12 @@ This part is sometimes a little trickier to figure out because each constraint m
 be expressed as an inequality.
 Here is a list of the contraints that we see from the problem, written in words:
 \begin{enumerate}
-     \item Each Fuzzy requires three Gizmos and each Buzzy requires two
-         Gizmos, but there are only 120 Gizmos available.  We can write this
+     \item Each Fuzzy requires three Gizmos and each Buzzy requires twelve
+         Gizmos, but there are only 240 Gizmos available.  We can write this
          mathematically as $3F + 12 B \le 240$, or $F \le 80 - 4B$
      \item Each Fuzzy requires two Fizmos and each Buzzy requires two
-         Fizmos, but there are only 150 Fizmos available.  We can write this
-         mathematically as $2F + 2B \le 50$, or $F \le 50 - B$.
+         Fizmos, but there are only 100 Fizmos available.  We can write this
+         mathematically as $2F + 2B \le 100$, or $F \le 50 - B$.
       \item The total number of Fuzzys made cannot be negative, so $F \ge 0$.
          The same holds for the Buzzys, so $B \ge 0$.
 \end{enumerate}
